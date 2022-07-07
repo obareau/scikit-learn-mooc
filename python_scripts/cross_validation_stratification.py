@@ -106,7 +106,7 @@ cv = KFold(n_splits=n_splits)
 
 train_cv_counts = []
 test_cv_counts = []
-for fold_idx, (train_idx, test_idx) in enumerate(cv.split(data, target)):
+for train_idx, test_idx in cv.split(data, target):
     target_train, target_test = target.iloc[train_idx], target.iloc[test_idx]
 
     train_cv_counts.append(target_train.value_counts())
@@ -169,7 +169,7 @@ print(f"The average accuracy is "
 # %%
 train_cv_counts = []
 test_cv_counts = []
-for fold_idx, (train_idx, test_idx) in enumerate(cv.split(data, target)):
+for train_idx, test_idx in cv.split(data, target):
     target_train, target_test = target.iloc[train_idx], target.iloc[test_idx]
 
     train_cv_counts.append(target_train.value_counts())
@@ -217,7 +217,7 @@ print(f"The average accuracy is "
 # %%
 train_cv_counts = []
 test_cv_counts = []
-for fold_idx, (train_idx, test_idx) in enumerate(cv.split(data, target)):
+for train_idx, test_idx in cv.split(data, target):
     target_train, target_test = target.iloc[train_idx], target.iloc[test_idx]
 
     train_cv_counts.append(target_train.value_counts())

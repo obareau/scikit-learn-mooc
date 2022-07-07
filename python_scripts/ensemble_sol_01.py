@@ -82,7 +82,7 @@ _ = search.fit(data_train, target_train)
 # %% tags=["solution"]
 import pandas as pd
 
-columns = [f"param_{name}" for name in param_grid.keys()]
+columns = [f"param_{name}" for name in param_grid]
 columns += ["mean_test_error", "std_test_error"]
 cv_results = pd.DataFrame(search.cv_results_)
 cv_results["mean_test_error"] = -cv_results["mean_test_score"]

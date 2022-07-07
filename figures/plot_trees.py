@@ -112,10 +112,7 @@ def update_legend(ax, bbox_to_anchor=(0.5, 0.5, 0.5, 0.5)):
 
     def sort_key(args):
         label, _ = args
-        if "data" in label:
-            return "0"  # move first
-        else:
-            return label
+        return "0" if "data" in label else label
 
     labels, handles = zip(*sorted(zip(labels, handles), key=sort_key))
     ax.legend(handles, labels, loc="upper right",
@@ -491,9 +488,10 @@ def plot_boost(pos, size=None):
     plt.plot(X, y_pred, color="blue")
 
 
-adaboost = []
-for i in range(1, 100):
-    adaboost.append(AdaBoostRegressor(n_estimators=i, random_state=1).fit(X, y))
+adaboost = [
+    AdaBoostRegressor(n_estimators=i, random_state=1).fit(X, y)
+    for i in range(1, 100)
+]
 
 plt.figure(figsize=(24, 8))
 
@@ -504,22 +502,25 @@ for i, pos in zip([1, 2, 4, 20], range(1, nb_subplot + 1)):
 
     plot_boost(pos, size=None)
     plt.savefig(
-        "../figures/boosting/boosting_iter" + str(pos) + ".svg",
+        f"../figures/boosting/boosting_iter{str(pos)}.svg",
         facecolor="none",
         edgecolor="none",
     )
+
     plot_boost(pos, size=y_loss)
     plt.savefig(
-        "../figures/boosting/boosting_iter_sized" + str(pos) + ".svg",
+        f"../figures/boosting/boosting_iter_sized{str(pos)}.svg",
         facecolor="none",
         edgecolor="none",
     )
+
     plot_boost_i(pos, i)
     plt.savefig(
-        "../figures/boosting/boosting_iter_orange" + str(pos) + ".svg",
+        f"../figures/boosting/boosting_iter_orange{str(pos)}.svg",
         facecolor="none",
         edgecolor="none",
     )
+
 
 
 # %% [markdown]

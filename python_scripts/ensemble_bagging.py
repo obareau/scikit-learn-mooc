@@ -171,7 +171,7 @@ print(
 
 # %%
 bag_of_trees = []
-for bootstrap_idx in range(n_bootstraps):
+for _ in range(n_bootstraps):
     tree = DecisionTreeRegressor(max_depth=3, random_state=0)
 
     data_bootstrap_sample, target_bootstrap_sample = bootstrap_sample(

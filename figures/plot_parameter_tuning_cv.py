@@ -48,10 +48,9 @@ def plot_cv_indices(cv, X, y, ax, lw=50):
         xlim=[0, 50],
     )
     ax.set_title(
-        "{} cross validation inside (non-shuffled-)train-test split".format(
-            type(cv).__name__
-        )
+        f"{type(cv).__name__} cross validation inside (non-shuffled-)train-test split"
     )
+
     ax.legend(
         [
             Patch(color=cmap_cv(0.9)),
@@ -113,7 +112,7 @@ def plot_cv_nested_indices(cv_inner, cv_outer, X, y, ax, lw=50):
         xlim=[0, 50],
     )
 
-    ax.set_title("{} nested cross-validation".format(type(cv_outer).__name__))
+    ax.set_title(f"{type(cv_outer).__name__} nested cross-validation")
     ax1 = ax.twinx()
     yticklabels = list(range(n_splits_outer))
     ax1.set(

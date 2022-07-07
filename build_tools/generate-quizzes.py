@@ -39,10 +39,9 @@ def write_all_exercises(input_root_path, output_root_path):
 
     for input_path in input_exercises:
         # FIXME there may be a better way with the pathlib API
-        relative_path_str = re.sub(str(input_root_path) + "/?", "",
-                                   str(input_path))
+        relative_path_str = re.sub(f"{str(input_root_path)}/?", "", str(input_path))
         output_path = Path(output_root_path).joinpath(relative_path_str)
-        print(str(input_path), str(output_path))
+        print(input_path, output_path)
         write_exercise_myst(input_path, output_path)
 
 if __name__ == "__main__":
