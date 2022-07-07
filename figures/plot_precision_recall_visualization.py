@@ -102,6 +102,10 @@ for C in Cs:
         hue=target_column, palette=["tab:blue", "tab:red"])
     plot_decision_function(logistic_regression, range_features, ax=ax)
     msg = "Weaker regularization" if C == 1 else "Stronger regularization"
-    plt.title(msg + f" (C={C})")
+    plt.title(f"{msg} (C={C})")
     plt.tight_layout()
-    plt.savefig("evaluation_quiz_precision_recall_C" + str(C) + ".svg", facecolor="none", edgecolor="none")
+    plt.savefig(
+        f"evaluation_quiz_precision_recall_C{str(C)}.svg",
+        facecolor="none",
+        edgecolor="none",
+    )

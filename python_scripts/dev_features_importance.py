@@ -447,8 +447,7 @@ def get_score_after_permutation(model, X, y, curr_feat):
     X_permuted.iloc[:, col_idx] = np.random.permutation(
         X_permuted[curr_feat].values)
 
-    permuted_score = model.score(X_permuted, y)
-    return permuted_score
+    return model.score(X_permuted, y)
 
 
 def get_feature_importance(model, X, y, curr_feat):
@@ -457,9 +456,7 @@ def get_feature_importance(model, X, y, curr_feat):
     baseline_score_train = model.score(X, y)
     permuted_score_train = get_score_after_permutation(model, X, y, curr_feat)
 
-    # feature importance is the difference between the two scores
-    feature_importance = baseline_score_train - permuted_score_train
-    return feature_importance
+    return baseline_score_train - permuted_score_train
 
 
 curr_feat = 'MedInc'
@@ -475,10 +472,10 @@ print(f'feature importance of "{curr_feat}" on train set is '
 # %%
 n_repeats = 10
 
-list_feature_importance = []
-for n_round in range(n_repeats):
-    list_feature_importance.append(
-        get_feature_importance(model, X_train, y_train, curr_feat))
+list_feature_importance = [
+    get_feature_importance(model, X_train, y_train, curr_feat)
+    for _ in range(n_repeats)
+]
 
 print(
     f'feature importance of "{curr_feat}" on train set is '
@@ -497,10 +494,10 @@ def permutation_importance(model, X, y, n_repeats=10):
 
     importances = []
     for curr_feat in X.columns:
-        list_feature_importance = []
-        for n_round in range(n_repeats):
-            list_feature_importance.append(
-                get_feature_importance(model, X, y, curr_feat))
+        list_feature_importance = [
+            get_feature_importance(model, X, y, curr_feat)
+            for _ in range(n_repeats)
+        ]
 
         importances.append(list_feature_importance)
 

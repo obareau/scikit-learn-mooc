@@ -169,7 +169,7 @@ print(
 # parameters.
 
 # %%
-model_grid_search.predict(data_test.iloc[0:5])
+model_grid_search.predict(data_test.iloc[:5])
 
 # %% [markdown]
 # You can know about these parameters by looking at the `best_params_`
@@ -199,7 +199,7 @@ cv_results.head()
 
 # %%
 # get the parameter names
-column_results = [f"param_{name}" for name in param_grid.keys()]
+column_results = [f"param_{name}" for name in param_grid]
 column_results += [
     "mean_test_score", "std_test_score", "rank_test_score"]
 cv_results = cv_results[column_results]
@@ -207,9 +207,7 @@ cv_results = cv_results[column_results]
 
 # %%
 def shorten_param(param_name):
-    if "__" in param_name:
-        return param_name.rsplit("__", 1)[1]
-    return param_name
+    return param_name.rsplit("__", 1)[1] if "__" in param_name else param_name
 
 
 cv_results = cv_results.rename(shorten_param, axis=1)

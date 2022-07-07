@@ -1,6 +1,7 @@
 """
 Simple example of overfit with splines
 """
+
 import numpy as np
 from matplotlib import pyplot as plt
 import style_figs
@@ -28,9 +29,10 @@ order = np.argsort(diabetes_X_train.ravel())
 X_train = diabetes_X_train.ravel()[order]
 y_train = diabetes_y_train[order]
 # Avoid duplicates
-y_train_ = list()
-for this_x in np.unique(X_train):
-    y_train_.append(np.mean(y_train[X_train == this_x]))
+y_train_ = [
+    np.mean(y_train[X_train == this_x]) for this_x in np.unique(X_train)
+]
+
 X_train = np.unique(X_train)
 
 y_train = np.array(y_train_)

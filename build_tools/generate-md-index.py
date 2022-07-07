@@ -19,8 +19,7 @@ def get_first_title_from_md_str(md_str):
     is_title_token = False
     for t in tokens:
         if is_title_token:
-            title = t.children[0].content
-            return title
+            return t.children[0].content
         if t.type == "heading_open":
             is_title_token = True
 
@@ -56,8 +55,7 @@ def docname_to_path(docname):
         path = path_without_suffix.with_suffix(suffix)
         if path.exists():
             return path
-    else:
-        raise ValueError(f"No filename found for docname: {docname}")
+    raise ValueError(f"No filename found for docname: {docname}")
 
 
 def get_single_file_markdown(docname):
@@ -110,8 +108,7 @@ def get_lesson_markdown(lesson):
     Predictive modeling pipeline module.
     """
     if not lesson["subtrees"]:
-        lesson_md = get_single_file_markdown(lesson["docname"])
-        return lesson_md
+        return get_single_file_markdown(lesson["docname"])
 
     path = docname_to_path(lesson["docname"])
     lesson_title = get_first_title(path)

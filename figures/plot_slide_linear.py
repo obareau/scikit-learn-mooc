@@ -407,14 +407,19 @@ transformation = [[0.4, 0.2], [-0.4, 1.2]]
 X = np.dot(X, transformation)
 
 
+multi_class = "multinomial"
+# create a mesh to plot in
+h = 0.02  # step size in the mesh
+# plt.title("Decision surface of LogisticRegression (%s)" % multi_class)
+# plt.axis('tight')
+
+# Plot also the training points
+colors = ["C0", "C1"]
 for C in [0.001, 1]:
-    multi_class = "multinomial"
     clf = linear_model.LogisticRegression(
         C=C, solver="sag", max_iter=100, random_state=42, multi_class=multi_class
     ).fit(X, y)
 
-    # create a mesh to plot in
-    h = 0.02  # step size in the mesh
     x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
     y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
@@ -426,11 +431,6 @@ for C in [0.001, 1]:
     Z = Z.reshape(xx.shape)
     plt.figure(figsize=(4, 3))
     plt.contour(xx, yy, Z, cmap=plt.cm.BrBG_r, linewidths=2)
-    # plt.title("Decision surface of LogisticRegression (%s)" % multi_class)
-    # plt.axis('tight')
-
-    # Plot also the training points
-    colors = ["C0", "C1"]
     for i, color in zip(clf.classes_, colors):
         idx = np.where(y == i)
         plt.scatter(
@@ -440,8 +440,8 @@ for C in [0.001, 1]:
     style_figs.light_axis()
     plt.ylabel("x2", size=16, weight=600)
     plt.xlabel("x1", size=16, weight=600)
-    plt.title("C=" + str(C))
-    plt.savefig("logistic_2D_C" + str(C) + ".svg", facecolor="none", edgecolor="none")
+    plt.title(f"C={str(C)}")
+    plt.savefig(f"logistic_2D_C{str(C)}.svg", facecolor="none", edgecolor="none")
 
 
 # %%

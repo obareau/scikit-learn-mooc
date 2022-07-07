@@ -50,7 +50,7 @@ def plot_cv_indices(cv, X, y, ax, lw=50):
         ["Training samples", "Testing samples"],
         loc=(1.02, 0.8),
     )
-    ax.set_title("{}".format(type(cv).__name__))
+    ax.set_title(f"{type(cv).__name__}")
     return ax
 
 

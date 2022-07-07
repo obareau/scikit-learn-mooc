@@ -67,8 +67,7 @@ _ = sns.scatterplot(data=full_data, x="data", y="target", color="black",
 
 # %%
 def f(data, weight=0, intercept=0):
-    target_predict = weight * data + intercept
-    return target_predict
+    return weight * data + intercept
 
 # %%
 # Write your code here.

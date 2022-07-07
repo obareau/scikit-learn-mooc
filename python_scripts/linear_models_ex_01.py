@@ -52,8 +52,7 @@ def linear_model_flipper_mass(
     flipper_length, weight_flipper_length, intercept_body_mass
 ):
     """Linear model of the form y = a * x + b"""
-    body_mass = weight_flipper_length * flipper_length + intercept_body_mass
-    return body_mass
+    return weight_flipper_length * flipper_length + intercept_body_mass
 
 
 # %% [markdown]

@@ -104,7 +104,7 @@ for estimator in results["estimator"]:
 # solution
 import pandas as pd
 
-index_columns = [f"param_{name}" for name in params.keys()]
+index_columns = [f"param_{name}" for name in params]
 columns = index_columns + ["mean_test_score"]
 
 inner_cv_results = []

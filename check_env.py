@@ -30,12 +30,15 @@ def import_version(pkg, min_ver, fail_msg=""):
         else:
             ver = mod.__version__
         if Version(ver) < min_ver:
-            print(FAIL, "%s version %s or higher required, but %s installed."
-                  % (lib, min_ver, ver))
+            print(
+                FAIL,
+                f"{lib} version {min_ver} or higher required, but {ver} installed.",
+            )
+
         else:
-            print(OK, '%s version %s' % (pkg, ver))
+            print(OK, f'{pkg} version {ver}')
     except ImportError:
-        print(FAIL, '%s not installed. %s' % (pkg, fail_msg))
+        print(FAIL, f'{pkg} not installed. {fail_msg}')
     return mod
 
 
@@ -43,15 +46,16 @@ def import_version(pkg, min_ver, fail_msg=""):
 print('Using python in', sys.prefix)
 print(sys.version)
 pyversion = Version(sys.version)
-if pyversion >= "3":
-    if pyversion < "3.6":
-        print(FAIL, "Python version 3.6 or above is required,"
-                    " but %s is installed." % sys.version)
-elif pyversion >= "2":
+if (
+    pyversion >= "3"
+    and pyversion < "3.6"
+    or pyversion < "3"
+    and pyversion >= "2"
+):
     print(FAIL, "Python version 3.6 or above is required,"
                 " but %s is installed." % sys.version)
-else:
-    print(FAIL, "Unknown Python version: %s" % sys.version)
+elif pyversion < "3":
+    print(FAIL, f"Unknown Python version: {sys.version}")
 
 print()
 requirements = {'numpy': "1.16", 'scipy': "1.2", 'matplotlib': "3.0",

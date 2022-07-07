@@ -2,6 +2,7 @@
 Some simple visualizations on the iris data.
 """
 
+
 import numpy as np
 from sklearn import datasets
 from matplotlib import pyplot as plt
@@ -16,7 +17,7 @@ X = iris.data
 y = iris.target
 for x, feature_name in zip(X.T, iris.feature_names):
     plt.figure(figsize=(2.5, 2))
-    patches = list()
+    patches = []
     for this_y, target_name in enumerate(iris.target_names):
         patch = plt.hist(x[y == this_y],
                          bins=np.linspace(x.min(), x.max(), 20),
@@ -26,7 +27,7 @@ for x, feature_name in zip(X.T, iris.feature_names):
     feature_name = feature_name.replace(' ', '_')
     feature_name = feature_name.replace('(', '')
     feature_name = feature_name.replace(')', '')
-    plt.savefig('iris_{}_hist.svg'.format(feature_name))
+    plt.savefig(f'iris_{feature_name}_hist.svg')
 
 plt.figure(figsize=(6, .25))
 plt.legend(patches, iris.target_names, ncol=3, loc=(0, -.37),

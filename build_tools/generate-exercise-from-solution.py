@@ -6,8 +6,7 @@ from jupytext.myst import myst_to_notebook
 import jupytext
 
 def replace_simple_text(input_py_str):
-    result = input_py_str.replace("📃 Solution for", "📝")
-    return result
+    return input_py_str.replace("📃 Solution for", "📝")
 
 
 def remove_solution(input_py_str):
@@ -38,10 +37,7 @@ def remove_solution(input_py_str):
     for c in cells_to_modify:
         c["source"] = pattern.sub("# Write your code here.", c["source"])
 
-    # TODO: we could potentially try to avoid changing the input file jupytext
-    # header since this info is rarely useful. Let's keep it simple for now.
-    py_nb_str = jupytext.writes(nb, fmt='py:percent')
-    return py_nb_str
+    return jupytext.writes(nb, fmt='py:percent')
 
 
 def write_exercise(solution_path, exercise_path):

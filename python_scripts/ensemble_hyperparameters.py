@@ -65,7 +65,7 @@ search_cv = RandomizedSearchCV(
 )
 search_cv.fit(data_train, target_train)
 
-columns = [f"param_{name}" for name in param_distributions.keys()]
+columns = [f"param_{name}" for name in param_distributions]
 columns += ["mean_test_error", "std_test_error"]
 cv_results = pd.DataFrame(search_cv.cv_results_)
 cv_results["mean_test_error"] = -cv_results["mean_test_score"]
@@ -134,7 +134,7 @@ search_cv = RandomizedSearchCV(
 )
 search_cv.fit(data_train, target_train)
 
-columns = [f"param_{name}" for name in param_distributions.keys()]
+columns = [f"param_{name}" for name in param_distributions]
 columns += ["mean_test_error", "std_test_error"]
 cv_results = pd.DataFrame(search_cv.cv_results_)
 cv_results["mean_test_error"] = -cv_results["mean_test_score"]
